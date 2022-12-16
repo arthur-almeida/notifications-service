@@ -1,4 +1,5 @@
-import { Content } from "./Content";
+import { Replace } from 'src/helpers/Replace';
+import { Content } from './Content';
 
 export type NotificationProps = {
   category: string;
@@ -6,13 +7,16 @@ export type NotificationProps = {
   createdAt: Date;
   readAt?: Date | null;
   recipientId: string;
-}
+};
 
 export class Notification {
   private props: NotificationProps;
 
-  constructor(props: NotificationProps) {
-    this.props = props;
+  constructor(props: Replace<NotificationProps, { createdAt?: Date }>) {
+    this.props = {
+      ...props,
+      createdAt: props.createdAt ?? new Date(),
+    };
   }
 
   public set category(newCategory: string) {
