@@ -1,6 +1,8 @@
+import { Content } from "./Content";
+
 export type NotificationProps = {
   category: string;
-  content: string;
+  content: Content;
   createdAt: Date;
   readAt?: Date | null;
   recipientId: string;
@@ -21,7 +23,7 @@ export class Notification {
     return this.props.category;
   }
 
-  public set content(newContent: string) {
+  public set content(newContent: Content) {
     this.props.content = newContent;
   }
 
