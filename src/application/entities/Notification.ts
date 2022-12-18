@@ -70,4 +70,8 @@ export class Notification {
   public get recipientId() {
     return this.props.recipientId;
   }
+
+  public unread() {
+    this.props.readAt = null;
+  }
 }
