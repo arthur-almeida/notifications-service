@@ -5,6 +5,7 @@ import { Content } from './Content';
 export type NotificationProps = {
   category: string;
   content: Content;
+  canceledAt?: Date | null;
   createdAt: Date;
   readAt?: Date | null;
   recipientId: string;
@@ -40,6 +41,14 @@ export class Notification {
 
   public get content() {
     return this.props.content;
+  }
+
+  public cancel() {
+    this.props.canceledAt = new Date();
+  }
+
+  public get canceledAt(): Date | null | undefined {
+    return this.props.canceledAt;
   }
 
   public get createdAt() {
