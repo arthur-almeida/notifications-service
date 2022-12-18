@@ -16,6 +16,16 @@ export class PrismaNotificationRepository implements NotificationRepository {
     });
   }
 
+  async countManyByRecipientId(recipientId: string): Promise<number> {
+    const count = await this.prismaService.notification.count({
+      where: {
+        recipientId: recipientId,
+      },
+    });
+
+    return count;
+  }
+
   async findById(notificationId: string): Promise<Notification | null> {
     const notification = await this.prismaService.notification.findUnique({
       where: {
