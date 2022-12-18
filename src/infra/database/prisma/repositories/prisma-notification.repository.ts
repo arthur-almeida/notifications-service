@@ -16,7 +16,19 @@ export class PrismaNotificationRepository implements NotificationRepository {
     });
   }
 
-  findById(notificationId: string): Promise<Notification | null> {
+  async findById(notificationId: string): Promise<Notification | null> {
+    const notification = await this.prismaService.notification.findUnique({
+      where: {
+        id: notificationId,
+      },
+    });
+
+    if (!notification) return null;
+
+    return PrismaNotificationMapper.toDomain(notification);
+  }
+
+  findManyByRecipientId(recipientId: string): Promise<Notification[]> {
     throw new Error('Method not implemented.');
   }
 
